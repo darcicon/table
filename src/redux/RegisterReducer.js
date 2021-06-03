@@ -28,6 +28,11 @@ export function RegisterReducer(state = initState, action) {
     case CREATE:
       return { ...state, list: [action.payload, ...state.list] };
 
+    case DELETE:
+      const oldList = state.list;
+      oldList.splice(action.payload, 1);
+      console.log("OL", oldList);
+
     default:
       return state;
   }

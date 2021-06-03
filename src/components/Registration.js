@@ -36,7 +36,7 @@ export function Registration() {
     );
 
     setSuccessOperation(true);
-    setTimeout(() => setSuccessOperation(false), 5000);
+    setTimeout(() => setSuccessOperation(false), 3000);
 
     setNAme("");
     setUserNAme("");
@@ -50,9 +50,7 @@ export function Registration() {
       <div className="col-12 col-md-6">
         <div>
           <h1 className="bg-light text-info p-3">Sign Up</h1>
-          {successOperation && (
-            <div className="alert alert-success">Opeation Success</div>
-          )}
+
           <div className="mb-1 p-1">
             <input
               type="text"
@@ -92,6 +90,10 @@ export function Registration() {
               className="form-control"
             />
           </div>
+
+          {successOperation && (
+            <div className="alert alert-success">Registered</div>
+          )}
 
           <div className="mb-1 p-2">
             <input
