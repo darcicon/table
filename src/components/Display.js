@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { deleteUserAction } from "../redux/RegisterReducer";
+import { deleteUserAction, updateRefUser } from "../redux/RegisterReducer";
 
 export function Display() {
   const state = useSelector((state) => state);
@@ -15,6 +15,12 @@ export function Display() {
 
     setSuccessOperation(true);
     setTimeout(() => setSuccessOperation(false), 3000);
+  };
+
+  const updateUser = (item) => {
+    dispatch(updateRefUser(item));
+
+    history.push("/register");
   };
 
   return (
@@ -47,6 +53,7 @@ export function Display() {
                   <input
                     type="button"
                     value="Edit"
+                    onClick={() => updateUser(item)}
                     className="btn btn-link text-warning"
                   />{" "}
                   /

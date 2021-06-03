@@ -9,10 +9,10 @@ export function Registration() {
   const history = useHistory();
   console.log(state);
 
-  const [name, setNAme] = useState("");
-  const [userName, setUserNAme] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setNAme] = useState(state.register.ref.name);
+  const [userName, setUserNAme] = useState(state.register.ref.userName);
+  const [email, setEmail] = useState(state.register.ref.email);
+  const [password, setPassword] = useState(state.register.ref.email);
 
   const [successOperation, setSuccessOperation] = useState(false);
   const [errorOperation, setErrorOperation] = useState(false);
@@ -49,7 +49,9 @@ export function Registration() {
       <div className="col-3 col-md-3 d-none d-md-block "></div>
       <div className="col-12 col-md-6">
         <div>
-          <h1 className="bg-light text-info p-3">Sign Up</h1>
+          <h1 className="bg-light text-info p-3">
+            {state.register.ref.userName ? "Edit Changes" : "Sign Up"}
+          </h1>
 
           <div className="mb-1 p-1">
             <input
@@ -96,12 +98,21 @@ export function Registration() {
           )}
 
           <div className="mb-1 p-2">
-            <input
-              type="button"
-              value="Register"
-              onClick={(e) => addUser(e)}
-              className="btn btn-success "
-            />
+            {state.register.ref.userName ? (
+              <input
+                type="button"
+                className="btn btn-warning"
+                value="Update"
+                onClick={() => {}}
+              />
+            ) : (
+              <input
+                type="button"
+                value="Register"
+                onClick={(e) => addUser(e)}
+                className="btn btn-success "
+              />
+            )}
           </div>
         </div>
       </div>
