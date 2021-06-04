@@ -13,7 +13,18 @@ const REF = "REF";
 
 // ACTIONS :: COmponents are interacting with this action
 export function createUserAction(payload) {
-  return { type: CREATE, payload: payload };
+  return async (dispatch) => {
+    const url = "http://localhost:8080/api/user/";
+    const requestBody = { ...payload };
+
+    await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(requestBody),
+    });
+
+    dispatch({ type: CREATE, payload: payload });
+  };
 }
 
 export function updateUserAction(payload) {
