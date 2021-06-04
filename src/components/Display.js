@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { deleteUserAction, updateRefUser } from "../redux/RegisterReducer";
+import {
+  deleteUserAction,
+  updateRefUser,
+  viewAllUsers,
+} from "../redux/RegisterReducer";
 
 export function Display() {
   const state = useSelector((state) => state);
@@ -10,8 +14,12 @@ export function Display() {
 
   const [successOperation, setSuccessOperation] = useState(false);
 
+  useEffect(() => {
+    dispatch(viewAllUsers());
+  }, []);
+
   const deleteUser = (item, index) => {
-    dispatch(deleteUserAction(index));
+    dispatch(deleteUserAction(item));
 
     setSuccessOperation(true);
     setTimeout(() => setSuccessOperation(false), 3000);
@@ -43,7 +51,7 @@ export function Display() {
           <tbody>
             {[...state.register.list].map((item, index) => (
               <tr key={index}>
-                <th scope="row">{index + 1}</th>
+                <th scope="row">{item.id}</th>
                 <td>{item.name}</td>
                 <td>{item.userName}</td>
                 <td>{item.password}</td>
@@ -55,7 +63,7 @@ export function Display() {
                     value="Edit"
                     onClick={() => updateUser(item)}
                     className="btn btn-link text-warning"
-                  />{" "}
+                  />
                   /
                   <input
                     type="button"

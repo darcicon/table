@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { createUserAction } from "../redux/RegisterReducer";
+import { createUserAction, updateUserAction } from "../redux/RegisterReducer";
 
 export function Registration() {
   const state = useSelector((state) => state);
@@ -44,13 +44,29 @@ export function Registration() {
     setPassword("");
   };
 
+  const updateUser = () => {
+    dispatch(
+      updateUserAction({
+        id: state.register.ref.id,
+        name,
+        userName,
+        email,
+        password,
+      })
+    );
+    setNAme("");
+    setUserNAme("");
+    setEmail("");
+    setPassword("");
+  };
+
   return (
     <div className="row">
       <div className="col-3 col-md-3 d-none d-md-block "></div>
       <div className="col-12 col-md-6">
         <div>
           <h1 className="bg-light text-info p-3">
-            {state.register.ref.userName ? "Edit Changes" : "Sign Up"}
+            {state.register.ref.id ? "Edit Changes" : "Sign Up"}
           </h1>
 
           <div className="mb-1 p-1">
@@ -98,12 +114,12 @@ export function Registration() {
           )}
 
           <div className="mb-1 p-2">
-            {state.register.ref.userName ? (
+            {state.register.ref.id ? (
               <input
                 type="button"
                 className="btn btn-warning"
                 value="Update"
-                onClick={() => {}}
+                onClick={() => updateUser()}
               />
             ) : (
               <input
