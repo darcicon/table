@@ -5,7 +5,9 @@ import {
   deleteUserAction,
   updateRefUser,
   viewAllUsers,
+  viewById,
 } from "../redux/RegisterReducer";
+import { RegisterModal } from "./RegisterModal";
 
 export function Display() {
   const state = useSelector((state) => state);
@@ -29,6 +31,10 @@ export function Display() {
     dispatch(updateRefUser(item));
 
     history.push("/register");
+  };
+
+  const getById = (item) => {
+    dispatch(viewById(item));
   };
 
   return (
@@ -60,6 +66,13 @@ export function Display() {
                 <td>
                   <input
                     type="button"
+                    value="Details"
+                    className="btn btn-link"
+                    onClick={() => getById(item)}
+                  />
+                  /
+                  <input
+                    type="button"
                     value="Edit"
                     onClick={() => updateUser(item)}
                     className="btn btn-link text-warning"
@@ -81,6 +94,8 @@ export function Display() {
         )}
       </div>
       <div className="col-3 col-md-2 d-none d-md-block"></div>
+
+      <RegisterModal />
     </div>
   );
 }

@@ -65,6 +65,16 @@ export function viewAllUsers(payload) {
   };
 }
 
+export function viewById(payload) {
+  return async (dispatch) => {
+    const url = `http://localhost:8080/api/user/${payload.id}`;
+    const response = await fetch(url);
+    const userObj = await response.json();
+
+    dispatch(updateRefUser(userObj));
+  };
+}
+
 export function updateRefUser(payload) {
   return { type: REF, payload: payload };
 }
